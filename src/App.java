@@ -11,16 +11,16 @@ public class App {
     public static void main(String[] args) throws Exception {
         letrasString[0][0] = "A";
         printTabla();
-        Entrada();
+        Input();
     }
 
-    private static void Entrada() throws InterruptedException, IOException {
+    private static void Input() throws InterruptedException, IOException {
         int x = 0, y = 0, l = 1, vacias = 0;
         String result = "";
         while (true) {
             for (l = 1; l < letras.length; l++) {
                 String key = inp.nextLine();
-                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); //clear Windows console
                 switch (key) {
                     case "A", "a":
                         y--;
@@ -29,7 +29,6 @@ public class App {
                             break;
                         }
                         letrasString[x][y] = letras[l];
-                        // printTabla();
                         break;
                     case "W", "w":
                         x--;
@@ -38,7 +37,6 @@ public class App {
                             break;
                         }
                         letrasString[x][y] = letras[l];
-                        // printTabla();
                         break;
                     case "S", "s":
                         x++;
@@ -47,7 +45,6 @@ public class App {
                             break;
                         }
                         letrasString[x][y] = letras[l];
-                        // printTabla();
                         break;
                     case "D", "d":
                         y++;
@@ -57,24 +54,24 @@ public class App {
                         }
                         letrasString[x][y] = letras[l];
                         break;
-
-                    default:
+                    default: 
                         return;
                 }
                 printTabla();
-
+                //end of letter break the while
                 if (l == letras.length - 1) {
                     break;
                 }
-
             }
+            //get empty matriz field
             for (int f = 0; f < 6; f++)
                 for (int c = 0; c < 6; c++)
                     vacias += Objects.isNull(letrasString[f][c]) ? 1 : 0;
-
+            //get diagonal of matriz
             for (int i = 0; i < 6; i++) {
                 result += Objects.isNull(letrasString[i][i]) ? "-" : letrasString[i][i];
             }
+            //print password
             System.out.print(result + vacias);
         }
     }
